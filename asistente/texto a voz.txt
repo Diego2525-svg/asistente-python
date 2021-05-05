@@ -1,0 +1,137 @@
+r = rec.Recognizer() 
+e = rec.Recognizer() 
+cap=False
+h=True
+with rec.Microphone() as recurso:
+ while cap==False:
+    print("Di algo")
+    audio = r.listen(recurso)
+    try:
+        text = r.recognize_google(audio)
+        print("Lo que dijiste fue: {}".format(text))
+        cap=True
+    except:
+        parlante.say("Por favor repita la instruccion")
+        parlante.runAndWait()
+ parlante.say("Lista para recibir ordenes")
+
+
+
+  print("Escuchando ordenes")  
+ audio = r.listen(recurso)
+ text = r.recognize_google(audio)
+ print("Lo que dijiste fue: {}".format(text))
+
+import os 
+import sys
+from datetime import date
+import webbrowser
+import pyttsx3
+os.system("pause") 
+os.system("cls") 
+usuario =" Diego "
+h=True
+parlante = pyttsx3.init()
+voices = parlante.getProperty('voices')
+print("Que desea hacer")
+parlante.say("Que desea hacer")
+parlante.runAndWait()
+while h==True:
+     print("Estoy lista para recibir ordenes")
+     text=input()
+     if "musica"in text:
+     webbrowser.open("https://www.youtube.com/watch?v=KoToTSUHZtw&list=RDPzlVjgKzyBY&index=4")
+     parlante.say("Reproduciendo musica en youtube")
+     parlante.runAndWait()
+ elif "facebook" in text :
+     webbrowser.open("https://www.facebook.com")
+     parlante.say("Abriendo Facebook")
+     parlante.runAndWait()
+ elif "Adios" in text:
+     h=False
+else:
+     parlante.say("Hasta la proxima")
+     parlante.runAndWait()
+
+import pyttsx3 #pip
+import speech_recognition as sr #pip
+import datetime
+import wikipedia #pip
+import webbrowser #pip
+import os
+import random
+opcion=int
+opcion=random.randrange(3)
+parlante = pyttsx3.init("sapi5")#define parlante
+voices= parlante.getProperty("voices")
+voices= parlante.setProperty("voz", voices[0].id)
+usuario=("Diego")
+print ("Iniciando asistente")
+#Funcion para que el asistente hable
+def hablar (text):
+    parlante.say(text)
+    parlante.runAndWait()
+#Funcion para la hora y la bienvenida
+def Buenas():
+    hora=int(datetime.datetime.now().hour)
+    print(hora)
+    if hora>=0 and hora<12:
+        hablar("Buenos dias"+ usuario+"...")
+    elif hora>=12 and hora<18:
+        hablar("Buenas tardes"+ usuario+"...")
+    else:
+        hablar("Buenas noches"+ usuario+"...")
+def recibir():
+    r=sr.Recognizer()
+    with sr.Microphone() as recurso:
+        print("Escuchando instrucciones")
+        audio=r.listen(recurso)
+    try:
+        print("Reconociendo instruccion")
+        ins=r.recognize_google (audio)
+        print("Se entendio ",ins)
+    except Exception:
+        print("No se entendio ninguna instruccion")
+        ins=None
+    return ins
+#clase principal        
+hablar ("Iniciando asistente...")   
+Buenas()
+#poner aqui while para mantener el asistente activo
+ins = recibir()
+if "wikipedia" in ins.lower():
+    hablar("Que desea buscar en wikipedia...")
+    ins=ins.replace("wikipedia","")
+    resultado= wikipedia.summary(ins,sentences=2)
+    hablar(resultado)
+    print(resultado)
+elif "youtube" in ins.lower():
+    webbrowser.open("https://www.youtube.com")
+    hablar("Abriendo Youtube...")
+elif"facebook" in ins.lower():
+     webbrowser.open("https://www.facebook.com")
+     hablar("Abriendo Facebook...")
+elif "hora" in ins.lower():
+    tiempo=datetime.datetime.now().strftime("%H:%M:%S")
+    hablar(usuario+"la hora es"+tiempo+"...")
+elif"musica" in ins.lower():
+    print(opcion)
+    if opcion==0:
+        webbrowser.open("https://www.youtube.com/watch?v=PzlVjgKzyBY")
+        hablar("Que te parece esta sugerencia"+usuario+"...")
+    elif opcion==1:
+        webbrowser.open("https://www.youtube.com/watch?v=7U2OFefW0eI&list=RDn63UbX5kzAc&index=2")
+        hablar("Que te parece esta sugerencia"+usuario+"...")
+    elif opcion==2:
+        webbrowser.open("https://www.youtube.com/watch?v=n63UbX5kzAc&list=RDn63UbX5kzAc&index=1")
+        hablar("Que te parece esta sugerencia"+usuario+"...")
+    elif opcion==3:
+        webbrowser.open("https://www.youtube.com/watch?v=k8U8gjFx9Vk")
+        hablar("Que te parece esta sugerencia"+usuario+"...")
+    else:
+        hablar("En estos momentos no se me ocurre ninduna sugerencia...")
+
+
+creacion de carpetas
+import os
+os.makedirs("carpeta prueba")
